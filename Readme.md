@@ -6,7 +6,6 @@ DRBG is used in [RFC6979](https://datatracker.ietf.org/doc/html/rfc6979) for det
 Please note that DRBG alone is not the full implementation of RFC6979, as a valid nonce would also need to clamped within the finite field of the curve you are using for ECDSA. For the full implementation of RFC6979, check out [solana-rfc6979](https://github.com/deanmlittle/solana-rfc6979).
 
 ### Usage
-To emulate the digest functionality of the `hmac` crate, use `HmacSha256`:
 
 ```rs
 let privkey: [u8;32] = [0xc9, 0xaf, 0xa9, 0xd8, 0x45, 0xba, 0x75, 0x16, 0x6b, 0x5c, 0x21, 0x57, 0x67, 0xb1, 0xd6, 0x93, 0x4e, 0x50, 0xc3, 0xdb, 0x36, 0xe8, 0x9b, 0x12, 0x7b, 0x8a, 0x62, 0x2b, 0x12, 0x0f, 0x67, 0x21];
