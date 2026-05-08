@@ -1,14 +1,29 @@
 [package]
 name = "solana-hmac-drbg"
 authors = ["Dean Little <@deanmlittle>"]
-description = "An efficient implementation of HMAC-DRBG for SVM"
-version = "0.1.0"
-edition = "2021"
+description = "A more efficient, no_std implementation of HMAC-DRBG for the Solana SVM"
 license = "MIT"
+version = "0.2.0"
+edition = "2024"
+repository = "https://github.com/blueshift-gg/solana-hmac-drbg"
+readme = "Readme.md"
+keywords = ["solana", "sbpf", "hmac", "drbg", "no-std"]
+categories = ["cryptography", "no-std"]
+exclude = [".github/", ".gitignore"]
 
 [lib]
-name = "solana_hmac_drbg"
-crate-type = ["cdylib", "lib"]
+
+[features]
+# Transparently forwards to `solana-hmac-sha256/static-syscalls`. Use the
+# Upstream BPF / sBPFv3 static-syscall ABI instead of dynamic `extern "C"`
+# linking. Requires a toolchain that supports static syscalls.
+static-syscalls = ["solana-hmac-sha256/static-syscalls"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
 
 [dependencies]
-solana-hmac-sha256 = "0.2.0"
+solana-hmac-sha256 = "0.3.0"
+
+[dev-dependencies]
+svm-unit-test = "0.1.5"
